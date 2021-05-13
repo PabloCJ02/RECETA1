@@ -1,0 +1,74 @@
+<%-  include  ('partials/_header');  -%>
+
+    <div class="container">
+        <div class="row">
+            <!--FORM-->
+            <div class="col-md-5">
+                <div class="card">
+                    <div class="card-body">
+                        <form action="/add" method="POST">
+                            <div class="form-group">
+                                <input type="text" name="title" placeholder="Inserta el nombre de la receta" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <textarea name="description" cols="80" class="form-control" placeholder="Inserta un el procedimiento"></textarea>
+                            </div>
+                            <div class="form-group">
+                                <input type="number" name="personas" placeholder="Introduce para cuantas personas es la receta" class="form-control">
+                            </div>
+                            <div>
+                                <label for="">Agrega una imagen de la bebida 😄☕🥛</label>
+                                <input type="file" id="image" class="form-control">
+                            </div>
+                            <br>
+                            <button type="submit" class="btn btn-primary btn-block">
+                                Agregar
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <!--LIST-->
+            <div class="col-md-7">
+                <table class="table table-bordered table-hover">
+                    <thead>
+                        <tr>
+                            <th>No.</th>
+                            <th>Receta</th>
+                            <th>Procedimiento</th>
+                            <th>Personas</th>
+                            <th>Foto</th>
+                            <th>Operation</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <% for(var i = 0; i < tasks.length; i++) { %>
+                            <tr>
+                                <td><%= i + 1 %></td>
+                                <td><%= tasks[i].title %></td>
+                                <td><%= tasks[i].description %></td>
+                                <td><%= tasks[i].personas %></td>
+                                <td>
+                                    <img id="user-photo">
+                                </td>
+                                <td>
+                                    <a href="/turn/<%= tasks[i]._id %>" 
+                                        class="btn <%= tasks[i].status ? 'btn-success' : 'btn-dark' %>">
+                                        Done
+                                    </a>
+                                    <a href="/delete/<%= tasks[i]._id %>" class="btn btn-danger">Delete</a>
+                                    <a href="/edit/<%= tasks[i]._id %>" class="btn btn-info">Edit</a>
+                                </td>
+                            </tr>
+                        <% } %>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <!--Scrip Cloudinary-->
+    <script src="https://widget.cloudinary.com/v2.0/global/all.js" type="text/javascript"></script>
+    <script src="../servicio-imagen.js"></script>
+
+
+    <%-  include  ('partials/_footer');  -%>
